@@ -1,0 +1,53 @@
+Python static analysis tools
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+■ Author    Tomas Kala
+■ Date      2023-05-17
+
+
+What is static analysis (good for)?
+───────────────────────────────────────────────────────────────────────────────
+■ Quickly find (possible) bugs and style issues in your code
+  ▶ Static = without running the code
+  ▶ Especially important for interpreted languages like Python
+■ I'll also include code formatters in the definition
+■ Not dependent on the developer writing tests
+■ Can enforce uniform coding style
+■ Command line tools that fail if some rules are broken
+
+
+Examples
+───────────────────────────────────────────────────────────────────────────────
+■ Python
+  ▪ Black (code formatting), isort (imports ordering).
+  ▪ autoflake, flake8, pyflakes, bandit, pydocstyle, eradicate, ...
+  ▪ ruff (more on that later)
+■ Go
+  ▪ gofmt (code formatting)
+  ▪ go vet (valid but questionable constructs), golint (coding style)
+■ C
+  ▪ Clang Static Analyzer
+
+
+Live demo
+───────────────────────────────────────────────────────────────────────────────
+■ "It worked just a few minutes ago!"
+■ "I have no idea why it's not working!"
+
+
+How do you introduce something like that at work?
+───────────────────────────────────────────────────────────────────────────────
+* TODO: git ignore revs to avoid ruining git blame
+
+
+How well does it perform?
+───────────────────────────────────────────────────────────────────────────────
+
+
+Ruff
+───────────────────────────────────────────────────────────────────────────────
+
+
+Live demo
+───────────────────────────────────────────────────────────────────────────────
+■ "I have no idea why it's working!"
+■ "This happens every time I do a live demo!"
