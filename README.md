@@ -9,6 +9,10 @@ Slidy slides.
    slides.
 * Run `./prepare <talk-name>/slides.txt`.
 
+## Presentation
+
+* Run `./present <talk-name>`.
+
 ## Vim digraphs
 
 * Type `:help digraphs`.

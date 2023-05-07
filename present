@@ -1,0 +1,16 @@
+#!/bin/sh
+set -eu
+
+die() {
+  printf '%s\n' "$1" >&2 && exit 1
+}
+
+[ -f "$1/slide00.txt" ] || die 'slide00.txt missing, did you run ./prepare?'
+
+vim \
+  --clean \
+  -c 'nn <PageDown> :bn<cr>' \
+  -c 'nn <PageUp> :bp<cr>' \
+  -c 'colo shine' \
+  -c 'set cul' \
+  "$1"/slide??.txt
