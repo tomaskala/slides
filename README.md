@@ -7,7 +7,7 @@ Slidy slides.
 * Create a `<talk-name>/slides.txt` file with slides separated by empty lines.
    No slide may contain an empty line; otherwise, it would be considered two 
    slides.
-* Run `./prepare <talk-name>/slides.txt`.
+* Run `./prepare <talk-name>`.
 
 ## Presentation
 
