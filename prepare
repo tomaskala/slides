@@ -10,5 +10,5 @@ for slide in "$1"/slide??.txt; do
   n=$(printf '%s' "${slide}" | grep -o '[0-9][0-9]')
   n="${n#0}"
   n=$((n+1))
-  sed -i -e "1s@^@[${n#0}/${nslides}] @" -e 's/^/ /' "${slide}"
+  sed -i -e "1s@^@[${n}/${nslides}] @" -e 's/^/ /' "${slide}"
 done
