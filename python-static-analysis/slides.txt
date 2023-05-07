@@ -19,7 +19,7 @@ Examples
 ───────────────────────────────────────────────────────────────────────────────
 ■ Python
   ▪ Black (code formatting), isort (imports ordering).
-  ▪ autoflake, flake8, pyflakes, bandit, pydocstyle, eradicate, ...
+  ▪ autoflake, flake8, pyflakes, bandit, pydocstyle, eradicate, vulture, ...
   ▪ ruff (more on that later)
 ■ Go
   ▪ gofmt (code formatting)
