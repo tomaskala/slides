@@ -26,6 +26,8 @@ Examples
   ▪ go vet (valid but questionable constructs), golint (coding style)
 ■ C
   ▪ Clang Static Analyzer
+■ Shell
+  ▪ shellcheck
 
 
 Live demo
