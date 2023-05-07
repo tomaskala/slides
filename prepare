@@ -1,15 +1,8 @@
 #!/bin/sh
 set -eu
 
-nslides=$(csplit \
-  --prefix 'slide' \
-  --suffix-format '%02d.txt' \
-  --suppress-matched \
-  --elide-empty-files \
-  "$1/slides.txt" \
-  '/^$/' \
-  '{*}' \
-  | wc -l)
+nslides=$(csplit -f 'slide' -b '%02d.txt' -z --suppress-matched \
+  "$1/slides.txt" '/^$/' '{*}' | wc -l)
 
 mv ./slide??.txt "$1"
 
