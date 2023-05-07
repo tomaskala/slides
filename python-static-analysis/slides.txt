@@ -38,7 +38,16 @@ Live demo
 
 How do you introduce something like that at work?
 ───────────────────────────────────────────────────────────────────────────────
-* TODO: git ignore revs to avoid ruining git blame
+■ Very slowly, one tool at a time and not on a Friday
+  ▶ Agree on the tools
+  ▶ Do a PR showing the changes and let other team members comment
+  ▶ Make sure everybody's workflow is compatible
+  ▶ Enable in CI
+  ▶ Fix (many) conflicts
+  ▶ Merge quickly
+■ Should CI autoformat or just check?
+■ How not to ruin git blame
+  ▪ git config blame.ignoreRevsFile .git-blame-ignore-revs
 
 
 How well does it perform?
