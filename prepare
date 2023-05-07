@@ -1,14 +1,21 @@
 #!/bin/sh
 set -eu
 
-csplit \
+nslides=$(csplit \
   --prefix 'slide' \
   --suffix-format '%02d.txt' \
-  --silent \
   --suppress-matched \
   --elide-empty-files \
   "$1/slides.txt" \
   '/^$/' \
-  '{*}'
+  '{*}' \
+  | wc -l)
 
 mv ./slide??.txt "$1"
+
+for slide in "$1"/slide??.txt; do
+  n=$(printf '%s' "${slide}" | grep -o '[0-9][0-9]')
+  n="${n#0}"
+  n=$((n+1))
+  sed -i -e "1s@^@[${n#0}/${nslides}] @" -e 's/^/ /' "${slide}"
+done
