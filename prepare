@@ -1,0 +1,16 @@
+#!/bin/sh
+set -eu
+
+parent=$(dirname "$1")
+
+csplit \
+  --prefix 'slide' \
+  --suffix-format '%02d.txt' \
+  --silent \
+  --suppress-matched \
+  --elide-empty-files \
+  "$1" \
+  '/^$/' \
+  '{*}'
+
+[ "${parent}" != '.' ] && mv ./slide??.txt "${parent}"
