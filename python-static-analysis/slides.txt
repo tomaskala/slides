@@ -36,7 +36,7 @@ Live demo
 
 How do you introduce something like that at work?
 ───────────────────────────────────────────────────────────────────────────────
-■ Very slowly, one tool at a time and not on a Friday
+■ Very slowly, one module at a time and not on a Friday
   ▶ Agree on the tools
   ▶ Do a PR showing the changes and let other team members comment
   ▶ Make sure everybody's workflow is compatible
