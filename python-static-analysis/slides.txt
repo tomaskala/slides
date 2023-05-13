@@ -54,6 +54,16 @@ How well does it perform?
 
 Ruff
 ───────────────────────────────────────────────────────────────────────────────
+■ A Rust implementation of many existing linters
+  ▪ isort, flake8 + all plugins, bandit, subset of pylint, ...
+■ Many issues are auto-fixable
+■ ~Weekly releases
+■ Entirely configured in a pyproject.toml file
+  ▶ Can specify Python version
+■ Used in Apache Airflow, Pandas, SciPy, FastAPI, ...
+■ Checks that rule-disabling comments are meaningful
+  ▶ # noqa: UP006
+  ▶ (Python 3.9+) UP006: Use 'list' instead of 'List' for type annotations
 
 
 Live demo
