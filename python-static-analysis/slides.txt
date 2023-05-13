@@ -48,10 +48,6 @@ How do you introduce something like that at work?
   ▪ git config blame.ignoreRevsFile .git-blame-ignore-revs
 
 
-How well does it perform?
-───────────────────────────────────────────────────────────────────────────────
-
-
 Ruff
 ───────────────────────────────────────────────────────────────────────────────
 ■ A Rust implementation of many existing linters
@@ -70,3 +66,11 @@ Live demo
 ───────────────────────────────────────────────────────────────────────────────
 ■ "I have no idea why it's working!"
 ■ "This happens every time I do a live demo!"
+
+
+End results
+───────────────────────────────────────────────────────────────────────────────
+■ Enforcing uniform code style
+■ Catching code smells and common errors in the pipelines
+■ Single configuration file for all linters
+■ Team members happy
