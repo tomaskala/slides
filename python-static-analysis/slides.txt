@@ -9,18 +9,17 @@ What is static analysis (good for)?
 ■ Quickly find (possible) bugs and style issues in your code
   ▶ Static = without running the code
   ▶ Especially important for interpreted languages like Python
+  ▶ Command line tools that fail if some rules are broken
 ■ I'll also include code formatters in the definition
+  ▶ Enforce uniform coding style, e.g., {"key": value} vs dict(key=value)
 ■ Not dependent on the developer having written tests
-■ Enforce uniform coding style
-  ▶ {"key": value} vs dict(key=value)
-■ Command line tools that fail if some rules are broken
 
 
 Examples
 ───────────────────────────────────────────────────────────────────────────────
 ■ Python
   ▪ Black (code formatting), isort (imports ordering).
-  ▪ autoflake, flake8, pyflakes, bandit, pydocstyle, mypy, vulture, ...
+  ▪ autoflake, flake8, pyflakes, bandit, mypy, ...
   ▪ ruff (more on that later)
 ■ Go
   ▪ gofmt (code formatting)
@@ -53,14 +52,11 @@ Ruff
 ───────────────────────────────────────────────────────────────────────────────
 ■ A Rust implementation of many existing linters
   ▪ isort, flake8 + all plugins, bandit, subset of pylint, ...
-■ Many issues are auto-fixable
-■ ~Weekly releases
 ■ Entirely configured in a pyproject.toml file
   ▶ Can specify Python version
+■ Many issues are auto-fixable
+■ ~Weekly releases
 ■ Used in Apache Airflow, Pandas, SciPy, FastAPI, ...
-■ Checks that rule-disabling comments are meaningful
-  ▶ # noqa: UP006
-  ▶ (Python 3.9+) UP006: Use 'list' instead of 'List' for type annotations
 
 
 Live demo
