@@ -24,7 +24,7 @@ Examples
   ▪ ruff (more on that later)
 ■ Go
   ▪ gofmt (code formatting)
-  ▪ go vet (valid but questionable constructs), golint (coding style)
+  ▪ go vet (valid but questionable constructs)
 ■ Shell
   ▪ shellcheck
 
