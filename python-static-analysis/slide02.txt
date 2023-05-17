@@ -1,0 +1,11 @@
+ [3/8] Examples
+ ───────────────────────────────────────────────────────────────────────────────
+ ■ Python
+   ▪ Black (code formatting), isort (imports ordering).
+   ▪ autoflake, flake8, pyflakes, bandit, mypy, ...
+   ▪ ruff (more on that later)
+ ■ Go
+   ▪ gofmt (code formatting)
+   ▪ go vet (valid but questionable constructs)
+ ■ Shell
+   ▪ shellcheck

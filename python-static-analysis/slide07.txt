@@ -1,0 +1,6 @@
+ [8/8] End results
+ ───────────────────────────────────────────────────────────────────────────────
+ ■ Enforcing uniform code style
+ ■ Catching code smells and common errors in the pipelines
+ ■ Single configuration file for all linters
+ ■ Team members happy

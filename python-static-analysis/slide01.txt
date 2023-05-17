@@ -1,0 +1,9 @@
+ [2/8] What is static analysis (good for)?
+ ───────────────────────────────────────────────────────────────────────────────
+ ■ Quickly find (possible) bugs and style issues in your code
+   ▶ Static = without running the code
+   ▶ Especially important for interpreted languages like Python
+   ▶ Command line tools that fail if some rules are broken
+ ■ I'll also include code formatters in the definition
+   ▶ Enforce uniform coding style, e.g., {"key": value} vs dict(key=value)
+ ■ Not dependent on the developer having written tests

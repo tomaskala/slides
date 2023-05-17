@@ -1,0 +1,9 @@
+ [6/8] Ruff
+ ───────────────────────────────────────────────────────────────────────────────
+ ■ A Rust implementation of many existing linters
+   ▪ isort, flake8 + all plugins, bandit, subset of pylint, ...
+ ■ Entirely configured in a pyproject.toml file
+   ▶ Can specify Python version
+ ■ Many issues are auto-fixable
+ ■ ~Weekly releases
+ ■ Used in Apache Airflow, Pandas, SciPy, FastAPI, ...
