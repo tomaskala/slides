@@ -12,4 +12,5 @@ vim \
   -c 'nn <PageDown> :bn<cr>' \
   -c 'nn <PageUp> :bp<cr>' \
   -c 'colo shine' \
+  -c 'set hid' \
   "$1"/slide??.txt
