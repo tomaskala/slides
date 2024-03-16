@@ -1,0 +1,17 @@
+ [5/11] Some history
+ ───────────────────────────────────────────────────────────────────────────────
+ ▶ Designed in 1995 by Tatu Ylonen, then at the Helsinki University of 
+   Technology (now called Aalto University)
+ ▶ Meant to replace the insecure telnet protocol
+ ▶ The (now obsolete) SSHv1 was given by implementation only
+ ▶ In 2004, RFC-4253 was accepted, formally specifying the SSHv2 standard
+   ◆ As a result, there exist many implementations of the protocol
+   ◆ OpenSSH (most common), various Cisco implementations, Paramiko, ...
+ ▶ The standard specifies:
+   ◆ SSH packet structure
+   ◆ Error handling
+   ◆ Handshake, teardown, individual messages
+   ◆ Encryption, authentication, compression
+ ▶ Various extensions to the standard have been published since
+ ───────────────────────────────────────────────────────────────────────────────
+ ★ https://datatracker.ietf.org/doc/html/rfc4253

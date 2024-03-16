@@ -1,0 +1,8 @@
+ [6/11] What do we want to do?
+ ───────────────────────────────────────────────────────────────────────────────
+ ▶ Traffic analysis
+ ▶ From the outside, on top of layer 4
+   ◆ No information about the communication direction (more on that later)
+   ◆ Can only view the initial handshake and the metadata
+   ◆ DOS-resistance
+ ▶ Goal: parse all the visible information that can be used for device tracking

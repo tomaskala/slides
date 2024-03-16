@@ -1,0 +1,34 @@
+ [7/11] What does it look like?
+ ───────────────────────────────────────────────────────────────────────────────
+   CLIENT                         SERVER
+  ┏━━━━━━━━━━━━TCP HANDSHAKE━━━━━━━━━━━━┓
+  ┃─────────────SYN──────────────▶      ┃
+  ┃      ◀───────────SYN+ACK────────────┃
+  ┃─────────────ACK──────────────▶      ┃
+  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+  ┏━━SSH VERSION EXCHANGE (any order)━━━┓
+  ┃────────version string────────▶      ┃  SSH protocol identification
+  ┃      ◀────────version string────────┃
+  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+  ┏━SSH ALGORITHMS EXCHANGE (any order)━┓
+  ┃─────supported algorithms─────▶      ┃  Exchange and negotiation of the
+  ┃      ◀─────supported algorithms─────┃  supported algorithms
+  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+  ┏SSH KEY EXCHANGE (any order, depends)┓
+  ┃────────key parameters────────▶      ┃  The number and packet contents
+  ┃      ◀────────key parameters────────┃  depends on the key algorithm
+  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+  ┏━━━━━━━━SSH ENCRYPTED TRAFFIC━━━━━━━━┓
+  ┃──────────────────────────────▶      ┃
+  ┃                ...                  ┃  The majority of the connection
+  ┃      ◀──────────────────────────────┃
+  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+  ┏━━━━━━━SSH CONNECTION TEARDOWN━━━━━━━┓
+  ┃──────────────────────────────▶      ┃
+  ┃      ◀──────────────────────────────┃
+  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+  ┏━━━━━━━TCP CONNECTION TEARDOWN━━━━━━━┓
+  ┃───────────FIN────────────────▶      ┃
+  ┃      ◀───────────FIN+ACK────────────┃
+  ┃───────────ACK────────────────▶      ┃
+  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛

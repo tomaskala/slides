@@ -1,0 +1,18 @@
+ [8/11] SSH version identifier
+ ───────────────────────────────────────────────────────────────────────────────
+ ▶ To identify an SSH communication, both sides send the string
+     SSH-protoversion-softwareversion SP comments CR LF
+   where
+   ◆ protoversion    ... "2.0"
+   ◆ softwareversion ... software identifier, such as "OpenSSH_7.2p2"
+   ◆ comments        ... optional comment, such as "Ubuntu-4ubuntu2.4"
+                         if included, SP must be present
+   ◆ maximum length is 255 characters
+ ▶ The server may send protoversion "1.99" to denote compatibility with SSH 1.0
+ ▶ In the compatibility mode, the version string may be terminated by LF instead
+ ▶ The server may optionally send a banner
+   ◆ Other lines of data
+   ◆ Each line SHOULD be terminated by CR LF and MUST NOT begin with "SSH-"
+   ◆ No limit on the line length or their amount
+   ◆ Fucking hell
+ ▶ Direction?

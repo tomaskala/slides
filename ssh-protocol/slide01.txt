@@ -1,0 +1,13 @@
+ [2/11] Outline
+ ───────────────────────────────────────────────────────────────────────────────
+ ▶ What is the SSH protocol?
+ ▶ Where do we find it?
+ ▶ Some history
+ ▶ What do we want to do?
+ ▶ What does it look like?
+ ▶ What does it look like in detail?
+   ◆ SSH version identifier
+   ◆ SSH packet
+   ◆ Algorithm exchange
+   ◆ Key exchange
+ ▶ How is it implemented?

@@ -1,0 +1,13 @@
+ [4/11] Where do we find it?
+ ───────────────────────────────────────────────────────────────────────────────
+  ┏━━━━━━━━━━┓
+  ┃   SSH    ┃  Application layer
+  ┣━━━━━━━━━━┫
+  ┃   TCP    ┃  Transport layer
+  ┣━━━━━━━━━━┫
+  ┃    IP    ┃  Network layer
+  ┣━━━━━━━━━━┫
+  ┃ Ethernet ┃
+  ┃    /     ┃  Link layer
+  ┃ Wireless ┃
+  ┗━━━━━━━━━━┛

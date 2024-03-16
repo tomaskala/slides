@@ -1,0 +1,15 @@
+ [11/11] Key exchange
+ ───────────────────────────────────────────────────────────────────────────────
+ ▶ A variable number of packets with variable structure
+ ▶ Depends on the negotiated algorithms
+   ◆ To parse correctly, we need to know the algorithms
+   ◆ To get the algorithms, we need to know the direction
+   ◆ Where do we get the direction?
+ ▶ There are 5 distinct groups of supported key exchange methods
+   ◆ In each group, all the algorithms share the same key exchange packets
+   ◆ We can write sub-parsers for each such group and try to match them
+   ◆ Except for 1 packet, the result is unambiguous
+   ◆ Works even when we only catch one side of the connection
+ ───────────────────────────────────────────────────────────────────────────────
+ ★ https://www.iana.org/assignments/ssh-parameters/ssh-parameters.xhtml#ssh-parameters-16
+ ★ https://ssh-comparison.quendi.de

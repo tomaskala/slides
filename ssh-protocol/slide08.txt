@@ -1,0 +1,12 @@
+ [9/11] SSH packet
+ ───────────────────────────────────────────────────────────────────────────────
+ ▶ The rest of the communication is wrapped in SSH packets
+  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+  ┃ uint32    packet_length  ┃  not including MAC or the packet length itself
+  ┃ byte      padding_length ┃
+  ┃ byte[n1]  payload        ┃  n1 = packet_length - padding_length - 1
+  ┃ byte[n2]  padding        ┃  n2 = padding_length
+  ┃ byte[m]   MAC            ┃  m = 0 until encryption starts
+  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ ▶ (packet_length, padding_length, payload, padding) are to be encrypted
+   ◆ Not relevant to traffic analysis, but WTF

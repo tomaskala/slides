@@ -1,0 +1,192 @@
+SSH Protocol
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+■ Author    Tomas Kala
+■ Date      2021-10-21
+
+
+Outline
+───────────────────────────────────────────────────────────────────────────────
+▶ What is the SSH protocol?
+▶ Where do we find it?
+▶ Some history
+▶ What do we want to do?
+▶ What does it look like?
+▶ What does it look like in detail?
+  ◆ SSH version identifier
+  ◆ SSH packet
+  ◆ Algorithm exchange
+  ◆ Key exchange
+▶ How is it implemented?
+
+
+What is the SSH protocol?
+───────────────────────────────────────────────────────────────────────────────
+▶ An application level protocol implemented on top of TCP
+▶ Creates a secure tunnel between a client and a server
+▶ Typical usage:
+  ◆ Remote administration
+  ◆ Copying files (scp, sftp, rsync, git, ...)
+  ◆ Port forwarding
+
+
+Where do we find it?
+───────────────────────────────────────────────────────────────────────────────
+ ┏━━━━━━━━━━┓
+ ┃   SSH    ┃  Application layer
+ ┣━━━━━━━━━━┫
+ ┃   TCP    ┃  Transport layer
+ ┣━━━━━━━━━━┫
+ ┃    IP    ┃  Network layer
+ ┣━━━━━━━━━━┫
+ ┃ Ethernet ┃
+ ┃    /     ┃  Link layer
+ ┃ Wireless ┃
+ ┗━━━━━━━━━━┛
+
+
+Some history
+───────────────────────────────────────────────────────────────────────────────
+▶ Designed in 1995 by Tatu Ylonen, then at the Helsinki University of 
+  Technology (now called Aalto University)
+▶ Meant to replace the insecure telnet protocol
+▶ The (now obsolete) SSHv1 was given by implementation only
+▶ In 2004, RFC-4253 was accepted, formally specifying the SSHv2 standard
+  ◆ As a result, there exist many implementations of the protocol
+  ◆ OpenSSH (most common), various Cisco implementations, Paramiko, ...
+▶ The standard specifies:
+  ◆ SSH packet structure
+  ◆ Error handling
+  ◆ Handshake, teardown, individual messages
+  ◆ Encryption, authentication, compression
+▶ Various extensions to the standard have been published since
+───────────────────────────────────────────────────────────────────────────────
+★ https://datatracker.ietf.org/doc/html/rfc4253
+
+
+What do we want to do?
+───────────────────────────────────────────────────────────────────────────────
+▶ Traffic analysis
+▶ From the outside, on top of layer 4
+  ◆ No information about the communication direction (more on that later)
+  ◆ Can only view the initial handshake and the metadata
+  ◆ DOS-resistance
+▶ Goal: parse all the visible information that can be used for device tracking
+
+
+What does it look like?
+───────────────────────────────────────────────────────────────────────────────
+  CLIENT                         SERVER
+ ┏━━━━━━━━━━━━TCP HANDSHAKE━━━━━━━━━━━━┓
+ ┃─────────────SYN──────────────▶      ┃
+ ┃      ◀───────────SYN+ACK────────────┃
+ ┃─────────────ACK──────────────▶      ┃
+ ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ ┏━━SSH VERSION EXCHANGE (any order)━━━┓
+ ┃────────version string────────▶      ┃  SSH protocol identification
+ ┃      ◀────────version string────────┃
+ ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ ┏━SSH ALGORITHMS EXCHANGE (any order)━┓
+ ┃─────supported algorithms─────▶      ┃  Exchange and negotiation of the
+ ┃      ◀─────supported algorithms─────┃  supported algorithms
+ ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ ┏SSH KEY EXCHANGE (any order, depends)┓
+ ┃────────key parameters────────▶      ┃  The number and packet contents
+ ┃      ◀────────key parameters────────┃  depends on the key algorithm
+ ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ ┏━━━━━━━━SSH ENCRYPTED TRAFFIC━━━━━━━━┓
+ ┃──────────────────────────────▶      ┃
+ ┃                ...                  ┃  The majority of the connection
+ ┃      ◀──────────────────────────────┃
+ ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ ┏━━━━━━━SSH CONNECTION TEARDOWN━━━━━━━┓
+ ┃──────────────────────────────▶      ┃
+ ┃      ◀──────────────────────────────┃
+ ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ ┏━━━━━━━TCP CONNECTION TEARDOWN━━━━━━━┓
+ ┃───────────FIN────────────────▶      ┃
+ ┃      ◀───────────FIN+ACK────────────┃
+ ┃───────────ACK────────────────▶      ┃
+ ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+
+SSH version identifier
+───────────────────────────────────────────────────────────────────────────────
+▶ To identify an SSH communication, both sides send the string
+    SSH-protoversion-softwareversion SP comments CR LF
+  where
+  ◆ protoversion    ... "2.0"
+  ◆ softwareversion ... software identifier, such as "OpenSSH_7.2p2"
+  ◆ comments        ... optional comment, such as "Ubuntu-4ubuntu2.4"
+                        if included, SP must be present
+  ◆ maximum length is 255 characters
+▶ The server may send protoversion "1.99" to denote compatibility with SSH 1.0
+▶ In the compatibility mode, the version string may be terminated by LF instead
+▶ The server may optionally send a banner
+  ◆ Other lines of data
+  ◆ Each line SHOULD be terminated by CR LF and MUST NOT begin with "SSH-"
+  ◆ No limit on the line length or their amount
+  ◆ Fucking hell
+▶ Direction?
+
+
+SSH packet
+───────────────────────────────────────────────────────────────────────────────
+▶ The rest of the communication is wrapped in SSH packets
+ ┏━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ ┃ uint32    packet_length  ┃  not including MAC or the packet length itself
+ ┃ byte      padding_length ┃
+ ┃ byte[n1]  payload        ┃  n1 = packet_length - padding_length - 1
+ ┃ byte[n2]  padding        ┃  n2 = padding_length
+ ┃ byte[m]   MAC            ┃  m = 0 until encryption starts
+ ┗━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+▶ (packet_length, padding_length, payload, padding) are to be encrypted
+  ◆ Not relevant to traffic analysis, but WTF
+
+
+Algorithm exchange
+───────────────────────────────────────────────────────────────────────────────
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ byte       SSH_MSG_KEXINIT                         ┃
+┃ byte[16]   cookie (random bytes)                   ┃
+┃                                                    ┃
+┃ name-list  kex_algorithms                          ┃
+┃                                                    ┃
+┃ name-list  server_host_key_algorithms              ┃
+┃                                                    ┃
+┃ name-list  encryption_algorithms_client_to_server  ┃
+┃ name-list  encryption_algorithms_server_to_client  ┃
+┃                                                    ┃
+┃ name-list  mac_algorithms_client_to_server         ┃
+┃ name-list  mac_algorithms_server_to_client         ┃
+┃                                                    ┃
+┃ name-list  compression_algorithms_client_to_server ┃
+┃ name-list  compression_algorithms_server_to_client ┃
+┃                                                    ┃
+┃ name-list  languages_client_to_server              ┃
+┃ name-list  languages_server_to_client              ┃
+┃                                                    ┃
+┃ boolean    first_kex_packet_follows                ┃
+┃ uint32     0 (reserved for future extension)       ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+▶ In each group, the first client-supported algorithm also supported
+  by the server is chosen.
+  ◆ To determine the algorithm, we have to know the direction
+  ◆ But, we determine the direction based on the algorithm
+  ◆ Fucking hell
+
+
+Key exchange
+───────────────────────────────────────────────────────────────────────────────
+▶ A variable number of packets with variable structure
+▶ Depends on the negotiated algorithms
+  ◆ To parse correctly, we need to know the algorithms
+  ◆ To get the algorithms, we need to know the direction
+  ◆ Where do we get the direction?
+▶ There are 5 distinct groups of supported key exchange methods
+  ◆ In each group, all the algorithms share the same key exchange packets
+  ◆ We can write sub-parsers for each such group and try to match them
+  ◆ Except for 1 packet, the result is unambiguous
+  ◆ Works even when we only catch one side of the connection
+───────────────────────────────────────────────────────────────────────────────
+★ https://www.iana.org/assignments/ssh-parameters/ssh-parameters.xhtml#ssh-parameters-16
+★ https://ssh-comparison.quendi.de

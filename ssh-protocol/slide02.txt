@@ -1,0 +1,8 @@
+ [3/11] What is the SSH protocol?
+ ───────────────────────────────────────────────────────────────────────────────
+ ▶ An application level protocol implemented on top of TCP
+ ▶ Creates a secure tunnel between a client and a server
+ ▶ Typical usage:
+   ◆ Remote administration
+   ◆ Copying files (scp, sftp, rsync, git, ...)
+   ◆ Port forwarding
